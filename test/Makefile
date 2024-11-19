@@ -6,7 +6,7 @@
 #    By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:20:43 by eproust           #+#    #+#              #
-#    Updated: 2024/11/19 16:42:16 by eproust          ###   ########.fr        #
+#    Updated: 2024/11/19 23:00:31 by eproust          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,12 @@ all: test
 test: $(NAME)
 	@echo $(TEST_TITLE)
 	@./$(NAME) $(ARGS)
+	@rm -f $(NAME)
 	
 leaks: $(NAME)
 	@echo $(TEST_TITLE)
-	valgrind ./$(NAME) $(ARGS)
+	@valgrind ./$(NAME) $(ARGS)
+	@rm -f $(NAME)
 
 $(NAME): $(O_FILES) $(A_LIB)
 	cc $(FLAGS) -o $@ $(O_FILES) $(A_LIB)
