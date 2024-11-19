@@ -6,11 +6,12 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:10:48 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/19 22:53:06 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/19 23:02:12 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // TODO Update list of .c files in Makefile
+// TODO Update ..gitignore file
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
