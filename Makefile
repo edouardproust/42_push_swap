@@ -10,7 +10,7 @@ H_DIR	= ./
 LIB_DIR	= libft/
 A_LIB	= $(LIB_DIR)libft.a
 
-FLAGS	= -I $(H_DIR) -I $(LIB_DIR) # -Werror -Wall -Wextra
+FLAGS	= -Werror -Wall -Wextra -I $(H_DIR) -I $(LIB_DIR)
 
 all: $(NAME)
 
@@ -23,7 +23,7 @@ $(NAME): $(O_FILES) $(A_LIB)
 $(A_LIB):
 	$(MAKE) -C $(LIB_DIR) bonus
 
-clean: $(O_FILES)
+clean:
 	rm -f $(O_FILES)
 	$(MAKE) -C $(LIB_DIR) clean
 
