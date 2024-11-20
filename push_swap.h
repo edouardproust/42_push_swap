@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:10:48 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/19 23:02:12 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/20 19:59:33 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 #include <stdlib.h>
 
 void	ft_do(char *action, t_list **a, t_list **b);
+void	sort_dispatch(t_list **a, t_list **b);
+void    ft_sort_3(t_list **lst);
+
+// Utils
+t_list	*get_max_node(t_list *lst);
 
 //TODO Remove the follwing calls + corresponding files:
 #include <stdio.h>

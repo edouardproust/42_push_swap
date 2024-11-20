@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:00:07 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/19 22:51:39 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/20 19:59:36 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	check_stack(t_list *stack);
 //TODO Move to utils:
-static void	free_2d_array(char **arr);
-static int	is_valid_number(char *n);
-static void del_node_content(void *content);
+void	free_2d_array(char **arr);
+int	is_valid_number(char *n);
+void del_node_content(void *content);
 
 t_list	*parse_args(t_list **stack, char ***args, int is_malloc_args)
 {
@@ -73,39 +73,25 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Error\n", 1);
 		exit(2);
 	}
-
-	// TESTS
-//	ft_debug("DUMMY_B", &a, &b);
-	ft_debug("PRINT_LISTS", &a, &b);	
-	ft_do("sa", &a, NULL);
-	ft_debug("PRINT_LISTS", &a, &b);	
-	ft_do("pb", &a, &b);
-	ft_do("pb", &a, &b);
-	ft_do("pb", &a, &b);
-	ft_debug("PRINT_LISTS", &a, &b);	
-	ft_do("rrr", &a, &b);
-	ft_debug("PRINT_LISTS", &a, &b);	
-	//ft_do("ss", &a, &b);
-	//ft_debug("PRINT_LISTS", &a, &b);	
-
+	sort_dispatch(&a, &b);
 	ft_lstclear(&a, del_node_content);
-	ft_lstclear(&b, del_node_content);
-
 	return (0);
 }
 
 /*
  * Check that the stack contains values that are unique and can be stored in an int.
  */
-static int	check_stack(t_list *stack)
+int	check_stack(t_list *stack)
 {
+	int		n;
 	t_list	*nex;
 
 	if (!stack)
 		return (0);
 	while (stack)
 	{
-		if (*(int *)(stack->content) > INT_MAX)
+		n = *(int *)(stack->content); 
+		if (n > INT_MAX || n < INT_MIN)
 			return (0);
 		nex = stack->next;
 		while (nex)
@@ -135,7 +121,7 @@ static void	free_2d_array(char **arr)
 }
 
 // TODO: ask if this is enough checks
-static int	is_valid_number(char *n)
+int	is_valid_number(char *n)
 {
 	if (*n == '-' || *n == '+')
 		n++;
@@ -146,11 +132,8 @@ static int	is_valid_number(char *n)
 	return (*n == '\0');
 }
 
-
-static void	del_node_content(void *content)
+void	del_node_content(void *content)
 {
 	if (content)
 		free(content);
 }
-
-
