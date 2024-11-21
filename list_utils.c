@@ -6,21 +6,34 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 19:47:29 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/20 19:52:53 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/21 17:57:36 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
+int	get_val(t_list *node)
+{
+	return *(int *)node->content;	
+}
+
+void	del_node_content(void *content)
+{
+	if (content)
+		free(content);
+}
+
 t_list	*get_max_node(t_list *lst)
 {
-	t_list  *biggest;
+	t_list  *max_node;
 
-	biggest = lst;
+	max_node = lst;
 	lst = lst->next;
 	while (lst)
 	{
-		if (*(int *)lst->content > *(int *)biggest->content)
-			biggest = lst;
+		if (get_val(lst) > get_val(max_node))
+			max_node = lst;
 		lst = lst->next;
 	}
-	return (biggest);
+	return (max_node);
 }

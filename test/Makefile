@@ -6,7 +6,7 @@
 #    By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:20:43 by eproust           #+#    #+#              #
-#    Updated: 2024/11/19 23:00:31 by eproust          ###   ########.fr        #
+#    Updated: 2024/11/21 19:15:25 by eproust          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,15 @@ NAME		= push_swap
 
 ARGS		= 1 2 3 4
 
-FLAGS   	= -I $(ROOT_DIR) -I $(LIB_DIR)
+FLAGS   	= -I$(ROOT_DIR) -I$(LIB_DIR) -I.
+
+C_TEST		= test.c
 
 ROOT_DIR	= ../
 LIB_DIR		= $(ROOT_DIR)libft/
 A_LIB		= $(LIB_DIR)libft.a
-C_FILES		= $(filter-out $(wildcard ../*test*.c), $(wildcard ../*.c))
-H_FILES		= $(wildcard $(ROOT_DIR)/*.h)
+C_FILES		= $(filter-out $(wildcard ../*test*.c), $(wildcard ../*.c)) $(C_TEST)
+H_FILES		= $(wildcard $(ROOT_DIR)*.h)
 O_FILES		= $(C_FILES:.c=.o)
 
 TEST_TITLE	= "\n┌──────────────┐\n| Test result: |\n└──────────────┘\n"

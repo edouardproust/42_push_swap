@@ -6,12 +6,9 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:10:48 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/20 19:59:33 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:32:50 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO Update list of .c files in Makefile
-// TODO Update ..gitignore file
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -20,16 +17,23 @@
 #include <limits.h>
 #include <stdlib.h>
 
-void	ft_do(char *action, t_list **a, t_list **b);
+// Sort
 void	sort_dispatch(t_list **a, t_list **b);
-void    ft_sort_3(t_list **lst);
+void    ft_sort_three(t_list **lst);
+
+// Actions
+void    swap(char stack_letter, t_list **stack);
+void    push(char stack_letter, t_list **from, t_list **to);
+void    rotate(char stack_letter, t_list **stack);
+void    rev_rotate(char stack_letter, t_list **stack);
 
 // Utils
-t_list	*get_max_node(t_list *lst);
+void	free_matrix(char **arr);
+int		is_valid_number(char *n);
 
-//TODO Remove the follwing calls + corresponding files:
-#include <stdio.h>
-void	ft_debug(const char *action, t_list **a, t_list **b);
-t_list	*parse_args(t_list **stack, char ***args, int is_malloc_args); // TODO Set as static in push_swap.c
+// List utils
+int		get_val(t_list *lst);
+void	del_node_content(void *content);
+t_list	*get_max_node(t_list *lst);
 
 #endif

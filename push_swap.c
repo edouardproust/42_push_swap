@@ -6,17 +6,13 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:00:07 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/20 19:59:36 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:02:45 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static int	check_stack(t_list *stack);
-//TODO Move to utils:
-void	free_2d_array(char **arr);
-int	is_valid_number(char *n);
-void del_node_content(void *content);
 
 t_list	*parse_args(t_list **stack, char ***args, int is_malloc_args)
 {
@@ -46,11 +42,11 @@ t_list	*parse_args(t_list **stack, char ***args, int is_malloc_args)
 	if ((*args)[i] != NULL || !check_stack(*stack))
 	{
 		if (is_malloc_args)
-			free_2d_array(*args);
+			free_matrix(*args);
 		return (ft_lstclear(stack, del_node_content), NULL);
 	}
 	if (is_malloc_args)
-		free_2d_array(*args);
+		free_matrix(*args);
 	return (*stack);
 }
 
@@ -103,37 +99,4 @@ int	check_stack(t_list *stack)
 		stack = stack->next;
 	}
 	return (1);
-}
-
-static void	free_2d_array(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		arr[i] = NULL;
-		i++;
-	}
-	free(arr);
-	arr = NULL;
-}
-
-// TODO: ask if this is enough checks
-int	is_valid_number(char *n)
-{
-	if (*n == '-' || *n == '+')
-		n++;
-	if (!('0' <= *n && *n <= '9'))
-		return (0);
-	while ('0' <= *n && *n <= '9')
-		n++;
-	return (*n == '\0');
-}
-
-void	del_node_content(void *content)
-{
-	if (content)
-		free(content);
 }
