@@ -6,13 +6,13 @@
 #    By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:20:43 by eproust           #+#    #+#              #
-#    Updated: 2024/11/21 19:15:25 by eproust          ###   ########.fr        #
+#    Updated: 2024/11/22 17:00:09 by eproust          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= push_swap
 
-ARGS		= 1 2 3 4
+ARGS		= 4 2 3 1
 
 FLAGS   	= -I$(ROOT_DIR) -I$(LIB_DIR) -I.
 
@@ -25,7 +25,7 @@ C_FILES		= $(filter-out $(wildcard ../*test*.c), $(wildcard ../*.c)) $(C_TEST)
 H_FILES		= $(wildcard $(ROOT_DIR)*.h)
 O_FILES		= $(C_FILES:.c=.o)
 
-TEST_TITLE	= "\n┌──────────────┐\n| Test result: |\n└──────────────┘\n"
+TEST_TITLE	= "\n┌──────────────┐\n│ Test result: │\n└──────────────┘\n"
 
 all: test
 

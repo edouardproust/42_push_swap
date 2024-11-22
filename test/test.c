@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:46:10 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/21 19:19:44 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/22 19:36:46 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_debug(const char *action, t_list **a, t_list **b)
 			}
 			if (b_cpy)
 			{
-				printf("%d\t|\n", *(int *)b_cpy->content);
+				printf(" %d\t│\n", *(int *)b_cpy->content);
 				b_cpy = b_cpy->next;
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:00:07 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/21 18:02:45 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/22 20:42:03 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Error\n", 1);
 		exit(2);
 	}
-	sort_dispatch(&a, &b);
+	sort_dispatch(a, b);
 	ft_lstclear(&a, del_node_content);
 	return (0);
 }

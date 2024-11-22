@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 19:47:29 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/21 17:57:36 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/22 17:55:02 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	get_val(t_list *node)
 {
+	if (!node)
+		return (INT_MIN);
 	return *(int *)node->content;	
 }
 

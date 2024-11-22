@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:10:48 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/21 18:32:50 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/22 20:42:40 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 #include <stdlib.h>
 
 // Sort
-void	sort_dispatch(t_list **a, t_list **b);
-void    ft_sort_three(t_list **lst);
+void	sort_dispatch(t_list *a, t_list *b);
+void    ft_sort_three(t_list *lst);
+void	calc_perform_actions(t_list *a, t_list *b, int *size_a);
 
 // Actions
 void    swap(char stack_letter, t_list **stack);
