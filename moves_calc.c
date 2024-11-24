@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions_calc.c                                     :+:      :+:    :+:   */
+/*   moves_calc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:07:31 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/22 21:02:55 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/24 21:01:02 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
- * Also calculates size of B stack
+ * Finds the target node in stack B: returns target_index and updates value
+ * of target_node.
+ * Also updates value of size_b
  */
-static int	get_target(t_list	*an, t_list *b, int	*size_b, t_list **target_node)
+static int	get_target(t_list *an, t_list *b, int *size_b, t_list **target_node)
 {
 	t_list	*max_node;
 	int		max_index;
@@ -50,12 +52,13 @@ static int	get_target(t_list	*an, t_list *b, int	*size_b, t_list **target_node)
 	return (target_index);
 }
 
-// TODO finish!
-/* 
- * Directions: rotate = 1, rev_rotate = -1
- *
+// TODO Add the 'ss' move case
+/*
+ * Calculates the minimum moves to position elements at `index_a` and `index_b` 
+ * on top of stacks A and B, respectively.
+ * Move directions: 1 for rotate, -1 for reverse rotate.
  */
-static int	calc_steps(int index_a, int index_b, int size_a, int size_b)
+static int	calc_moves(int index_a, int index_b, int size_a, int size_b)
 {
 	int	dir;
 	int	cost_a;
@@ -86,17 +89,49 @@ static int	calc_steps(int index_a, int index_b, int size_a, int size_b)
 	return (cost_a + cost_b);
 }
 
-// TODO finish!
-static void	do_actions(t_list *a_node, t_list *b_node, t_list *a, t_list *b, int *size_a, int size_b)
+// TODO Add the 'ss' move case
+static void	do_moves(t_list *a_node, t_list *b_node, t_list *a, t_list *b, int *size_a, int size_b)
 {	
-	// Rotate stacks
-		// TODO
+	/* Rotate stacks
+	//----- Begening similar part --------------------------//
+	cost_a = index_a;
+	dir = 1;
+	if (index_a > size_a / 2)
+	{
+		cost_a = size_a - index_a;
+		dir = -1;
+	}
+	cost_b = index_b;
+	if (index_b > size_b / 2)
+		cost_b = size_b - index_b;
+	if (dir == 1)
+		left_b = index_b - cost_a;
+	else if (dir == -1)
+		left_b = (size_b - index_b) - cost_a;
+	//----- End of similar part ------------------------------//
+	if (left_b <= 0)
+		if (dir == 1)
+			move_both("rr", a, b); // TODO Repeat 'cost_a + left_b' times
+			move_one("ra", a); // TODO Repeat '-left_b' times
+		else
+			move_both("rrr", a, b); // TODO Repeat 'cost_a + left_b' times
+			move_one("rra", a); // TODO Repeat '-left_b' times
+	else if (left_b < cost_b)
+		if (dir == 1)
+			move_both("rr", a, b); // TODO Repeat 'cost_a' times
+			move_one("rb", b); // TODO Repeat 'cost_b - cost-a' times 
+		else
+			TODO
+	else if
+			
+	*/	
+
 	// Push a
-	push('b', &a, &b);
+	move_push("pb", &a, &b);
 	*size_a -= 1;
 }
 
-void	calc_perform_actions(t_list *a, t_list *b, int *size_a)
+void	calc_do_moves(t_list *a, t_list *b, int *size_a)
 {
 	int		cost;
 	int		min_cost;
@@ -115,7 +150,7 @@ void	calc_perform_actions(t_list *a, t_list *b, int *size_a)
 	while (a && cost != 0)
 	{
 		target_index = get_target(a, b, &size_b, &target_node);	
-		cost = calc_steps(i, target_index, *size_a, size_b);
+		cost = calc_moves(i, target_index, *size_a, size_b);
 		if (cost < min_cost)
 		{
 			min_cost = cost; 
@@ -127,5 +162,5 @@ void	calc_perform_actions(t_list *a, t_list *b, int *size_a)
 		i++;
  	}
 	printf("[cheapest: nb = %d | target_nb = %d | min_cost = %d]\n", get_val(cheapest), get_val(cheapest_target), min_cost); // TODO Delete this line	
-	do_actions(cheapest, cheapest_target, a_tmp, b, size_a, size_b);
+	do_moves(cheapest, cheapest_target, a_tmp, b, size_a, size_b);
 }
