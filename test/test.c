@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:46:10 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/24 20:03:01 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/25 14:05:10 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	ft_debug(const char *action, t_list *a, t_list *b)
 
 	if (!action)
 		return ;
+	t_list *a_cpy = a;
 	if (!ft_strncmp("DUMMY_B", action, 7))
 	{
 		char **args_b = ft_split("12 -32 2 0 765 -78", ' ');
 		parse_args(&b, &args_b, 1);
 	}
-	t_list *a_cpy = a;
-	if (!ft_strncmp("PRINT_LIST_", action, 11))
+	else if(!ft_strncmp("PRINT_LIST_", action, 11))
 	{
 		printf("%s", header_1);
 		while (a_cpy)
@@ -50,7 +50,7 @@ void	ft_debug(const char *action, t_list *a, t_list *b)
 		printf("%s", footer_1_2_2);
 		printf("%s", footer_1_3);
 	}
-	if (!ft_strncmp("PRINT_LISTS", action, 12))
+	else if (!ft_strncmp("PRINT_LISTS", action, 12))
 	{
 		printf("%s", header_2);
 		t_list *b_cpy = b;
@@ -78,5 +78,9 @@ void	ft_debug(const char *action, t_list *a, t_list *b)
 		printf("%s", footer_2_3);
 	}
 	else
-		ft_putstr_fd("Call to fn `./debug.c:ft_debug()` has a wrong argument\n", 1);
+	{
+		ft_putstr_fd("Call to fn `./debug.c:ft_debug()` has a wrong argument: \"", 1);
+		ft_putstr_fd(action, 1);
+		ft_putstr_fd("\"\n", 1);
+	}
 }

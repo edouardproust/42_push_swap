@@ -6,54 +6,67 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:55:12 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/24 20:04:03 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/25 17:41:54 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
 // TODO To move to another file (norminette):
+int	do_push(t_list **from, t_list **to);
 int	do_swap(t_list **stack);
 int	do_rotate(t_list **stack);
 int	do_rev_rotate(t_list **stack);
 
 /*
  * Execute a push: move the top node of stack 'from' to the top of stack 'to'.
+ * Also update value of size_a and value of szie_b.
  */
-void	move_push(char *move, t_list **from, t_list **to)
+void	move_push(char *move, t_list **a, t_list **b, int *size_a, int *size_b)
 {
-	t_list	*f2;
+	int	success;
 
-	if (!(*from))
-		return ;
-	f2 = (*from)->next;
-	ft_lstadd_front(to, *from);
-	*from = f2; 
-	ft_putstr_fd(move, 1);
-	ft_putchar_fd('\n', 1);
-	ft_debug("PRINT_LISTS", *from, *to); // TODO Delete line
+	success = 0;
+	if (move[1] == 'b')
+	{
+		success = do_push(a, b);
+		*size_a -= 1;
+		*size_b += 1;
+	}
+	else
+	{
+		success = do_push(b, a);
+		*size_a += 1;
+		*size_b -= 1;
+	}
+	if (success)
+	{
+		ft_putstr_fd(move, 1);
+		ft_putchar_fd('\n', 1);	
+		ft_debug("PRINT_LISTS", *a, *b); // TODO Delete line
+	}
 }
 
 /*
  * Executes a single move on a stack:
  * swap (0), rotate (1), or reverse rotate (-1).
  */
-void	move_one(char *move, t_list *stack)
+void	move_one(char *move, t_list **stack)
 {
 	int	success;
 
 	success = 0;
 	if (move[0] == 's')
-		success = do_swap(&stack);
+		success = do_swap(stack);
 	else if (move[0] == 'r' && move[1] != 'r')
-		success = do_rotate(&stack);
-	else if (ft_strncmp(move, "rr", 2))
-		success = do_rev_rotate(&stack);
+		success = do_rotate(stack);
+	else if (ft_strncmp(move, "rr", 2) == 0)
+		success = do_rev_rotate(stack);
 	if (success)
 	{
 			ft_putstr_fd(move, 1);
 			ft_putchar_fd('\n', 1);
-			ft_debug(ft_strrchr(move, 'a') ? "PRINT_LIST_A" : "PRINT_LIST_B", stack); // TODO Delete line
+			ft_debug(ft_strrchr(move, 'a') ? "PRINT_LIST_A" : "PRINT_LIST_B", *stack); // TODO Delete line
 	}
 }
 
@@ -61,32 +74,44 @@ void	move_one(char *move, t_list *stack)
 	 * Execute a same single move on both stacks simultaneously:
  * swap (0), rotate (1), or reverse rotate (-1).
  */
-void	move_both(char *move, t_list *a, t_list *b)
+void	move_both(char *move, t_list **a, t_list **b)
 {
 	int	success;
 
 	success = 0;
-	if (ft_strncmp(move, "ss", 3))
+	if (ft_strncmp(move, "ss", 3) == 0)
 	{
-		success = do_swap(&a);
-		success |= do_swap(&b);
+		success = do_swap(a);
+		success |= do_swap(b);
 	}
-	else if (ft_strncmp(move, "rr", 3))
+	else if (ft_strncmp(move, "rr", 3) == 0)
 	{
-		success = do_rotate(&a);
-		success |= do_rotate(&b);
+		success = do_rotate(a);
+		success |= do_rotate(b);
 	}
 	else if (ft_strncmp(move, "rrr", 4) == 0)
 	{
-		success = do_rev_rotate(&a);
-		success |= do_rev_rotate(&b);
+		success = do_rev_rotate(a);
+		success |= do_rev_rotate(b);
 	}
 	if (success)
 	{
 		ft_putstr_fd(move, 1);	
 		ft_putchar_fd('\n', 1);
-		ft_debug("PRINT_LISTS", a, b); // TODO Delete line
+		ft_debug("PRINT_LISTS", *a, *b); // TODO Delete line
 	}
+}
+
+int	do_push(t_list **from, t_list **to)
+{
+	t_list	*f2;
+
+	if (!(*from))
+		return (0);
+	f2 = (*from)->next;
+	ft_lstadd_front(to, *from);
+	*from = f2; 
+	return (1);
 }
 
 int	do_swap(t_list **stack)
