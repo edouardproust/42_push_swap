@@ -6,14 +6,14 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:46:10 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/25 14:05:10 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:01:03 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "test.h"
 
-void	ft_debug(const char *action, t_list *a, t_list *b)
+void	ft_debug(const char *action, t_stack *a, t_stack *b)
 {
 	char *header_1		= "┌───────┐\n";
 	char *footer_1_1	= "│―――――――│\n";
@@ -27,18 +27,13 @@ void	ft_debug(const char *action, t_list *a, t_list *b)
 
 	if (!action)
 		return ;
-	t_list *a_cpy = a;
-	if (!ft_strncmp("DUMMY_B", action, 7))
-	{
-		char **args_b = ft_split("12 -32 2 0 765 -78", ' ');
-		parse_args(&b, &args_b, 1);
-	}
-	else if(!ft_strncmp("PRINT_LIST_", action, 11))
+	t_stack *a_cpy = a;
+	if(!ft_strncmp("PRINT_LIST_", action, 11))
 	{
 		printf("%s", header_1);
 		while (a_cpy)
 		{
-			printf("│%d\t│\n", get_val(a_cpy));
+			printf("│%d\t│\n", val(a_cpy));
 			a_cpy = a_cpy->next;
 		}
 		printf("%s", footer_1_1);
@@ -60,7 +55,7 @@ void	ft_debug(const char *action, t_list *a, t_list *b)
 				printf("│\t");
 			if (a_cpy)
 			{
-				printf("│%d", get_val(a_cpy));
+				printf("│%d", val(a_cpy));
 				a_cpy = a_cpy->next;
 				if (b_cpy)
 					printf("\t");
@@ -69,7 +64,7 @@ void	ft_debug(const char *action, t_list *a, t_list *b)
 			}
 			if (b_cpy)
 			{
-				printf(" %d\t│\n", get_val(b_cpy));
+				printf(" %d\t│\n", val(b_cpy));
 				b_cpy = b_cpy->next;
 			}
 		}

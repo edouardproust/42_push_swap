@@ -6,122 +6,117 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:34:57 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/25 20:57:58 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/27 03:56:24 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_list_sorted(t_list *lst);
-static void	sort_lists(t_list *a, t_list *b, int size_a);
-
-void	sort_dispatch(t_list *a, t_list *b)
-{
-	int	size_a;
-
-	if (is_list_sorted(a))
-		return ;
-	ft_debug("PRINT_LISTS", a, b); // TODO Delete line
-	size_a = ft_lstsize(a);
-	if (size_a == 2)
-		move_one("sa", &a);
-	else if (size_a == 3)
-		sort_three(&a);
-	else
-		sort_lists(a, b, size_a);
-}
-
-static int	is_list_sorted(t_list *lst)
-{
-	if (!lst)
-		return (1);
-	while (lst->next)
-	{
-		if (get_val(lst) > get_val(lst->next))
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
-}
-
-void	sort_three(t_list **lst)
-{
-	int	max_index;
-
-	max_index = get_bound_index(1, *lst);
-	if (max_index == 0)
-		move_one("ra", lst);
-	else if (max_index == 1)
-		move_one("rra", lst);
-	if (get_val(*lst) > get_val((*lst)->next))
-		move_one("sa", lst);
-}
-/*
-void	sort_three(t_list **lst)
-{
-	t_list	*max;
-
-	max = get_max_node(*lst);
-	if (max == *lst)
-		move_one("ra", lst);
-	else if (max == (*lst)->next)
-		move_one("rra", lst);
-	if (get_val(*lst) > get_val((*lst)->next))
-		move_one("sa", lst);
-}
-*/
-
-//TODO finish function
-/* Sorting algorythm used when stack a contains more than 3 ints.
- * 1. Until there are only 3 nodes lefts in A:
- *    1a. Move up to 2 nodes to stack B
- *    2b. Then move the other node to B so that:
- *        - nodes in B are in descreasing order
- *        - using the minimum number of moves
- * 2. Sort the 3 nodes left in stack A
- * 3. Push back all nodes from B to A
- * 4. Rotate / Re_rotate A so the smallest int is on top
+/**
+ * Moves the smallest node to the top of the stack.
+ *
+ * Rotates or reverse-rotates the stack based on the smallest node's
+ * position to minimize the number of moves.
+ *
+ * @param stack	Pointer to the stack to modify.
+ * @param size	The size of the stack.
  */
-static void	sort_lists(t_list *a, t_list *b, int size_a)
+static void	rotate_smallest_on_top(t_stack **stack, int size)
 {
-	int	size_b;
-	int	count;
-	int	min_index;	
-	int	rotations;
-	int	dir;
-	
-	printf("===== Push A->B (max 2 nodes) =====\n"); // TODO Delete line
-	count = 0;
-	size_b = 0;
-	while (size_a > 3 && count < 2)
-	{
-		move_push("pb", &a, &b, &size_a, &size_b);
-		count++;
-	}
-	printf("===== Push A->B (turc algo #1) =====\n"); // TODO Delete line
-	// 1b. While lstsize(a) > 3:
-	while (size_a > 3)
-		calc_do_moves(&a, &b, &size_a, &size_b);
-	printf("===== sort_three on A (turc algo #2) =====\n"); // TODO Delete line
-	sort_three(&a);
-	printf("===== Push back all nodes B->A (turc algo #3) =====\n"); // TODO Delete line
-	while (size_b != 0)
-		push_all_back_to_a(&a, &b, &size_a, &size_b); // TODO: Refactoring de cette function
-	// Rotate stack A
-	min_index = get_bound_index(0, a);
-	rotations = min_index;
+	t_stack	*min;
+	int		rotations;
+	int		dir;
+
+	if (!stack)
+		return ;
+	min = minmax_node(*stack, 0);
+	rotations = min->index;
 	dir = 1;
-	if (min_index > size_a / 2)
+	if (min->index > size / 2)
 	{
-		rotations = size_a - min_index;
+		rotations = size - min->index;
 		dir = -1;
 	}
 	while (rotations > 0)
 	{
 		if (dir == 1)
-			move_one("ra", &a);
+			move_one("ra", stack);
 		else
-			move_one("rra", &a);
+			move_one("rra", stack);
 		rotations--;
 	}
+}
+
+/**
+ * Sorts a stack of size 3 by performing rotations and swaps.
+ *
+ * The function places the largest element at the top of the stack,
+ * then places the stack in ascending order.
+ * 
+ * @param stack  A pointer to the stack to sort (of size 3).
+ */
+static void	sort_three(t_stack **stack)
+{
+	t_stack	*max;
+
+	max = minmax_node(*stack, 1);
+	if (max->index == 0)
+		move_one("ra", stack);
+	else if (max->index == 1)
+		move_one("rra", stack);
+	if ((*stack)->nb > (*stack)->next->nb)
+		move_one("sa", stack);
+}
+
+/**
+ * Sorts stack 'a' when it contains more than 3 nodes.
+ * 
+ * 1. Move up to 2 nodes to stack 'b'.
+ * 2. Continue moving nodes to stack 'b' in decreasing order.
+ * 3. Sort the remaining 3 nodes in stack 'a'.
+ * 4. Push all nodes back from 'b' to 'a' in increasing order.
+ * 5. Position the smallest node at the top of stack 'a'.
+ *
+ * @param a        A pointer to the first stack.
+ * @param b        A pointer to the second stack.
+ * @param size_a   The size of stack 'a'.
+ */
+static void	sort_lists(t_stack **a, t_stack **b, int size_a)
+{
+	int	size_b;
+
+	size_b = 0;
+	while (size_a > 3 && size_b < 2)
+		move_push("pb", a, b, &size_a, &size_b);
+	while (size_a > 3)
+		move_cheapest(a, b, &size_a, &size_b);
+	sort_three(a);
+	while (size_b > 0)
+		push_all_back_to_a(a, b, &size_a, &size_b);
+	rotate_smallest_on_top(a, size_a);
+}
+
+/**
+ * Dispatches sorting based on the size of stack 'a'.
+ *
+ * Sorts directly for stacks with 2 or 3 nodes, delegates to 
+ * 'sort_lists' for larger stacks. 
+ * 
+ * @param a    A pointer to the first stack.
+ * @param b    A pointer to the second stack.
+ */
+void	sort_dispatch(t_stack **a, t_stack **b)
+{
+	int	size_a;
+
+	if (is_stack_sorted(*a))
+		return ;
+	ft_debug("PRINT_LISTS", *a, *b); // TODO Delete line
+	size_a = ft_lstsize(*a);
+	if (size_a == 2)
+		move_one("sa", a);
+	else if (size_a == 3)
+		sort_three(a);
+	else
+		sort_lists(a, b, size_a);
 }

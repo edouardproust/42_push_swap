@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:56:11 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/25 19:41:46 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/26 22:50:15 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_matrix(char **arr)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (arr[i])
@@ -25,6 +25,16 @@ void	free_matrix(char **arr)
 	}
 	free(arr);
 	arr = NULL;
+}
+
+void	error_exit(char **av, t_stack *stack, int is_malloc_av)
+{
+	ft_putstr_fd("Error\n", 1);
+	if (is_malloc_av)
+		free_matrix(av);
+	if (stack)
+		clear_stack(&stack);
+	exit(2);
 }
 
 int	is_valid_number(char *n)
