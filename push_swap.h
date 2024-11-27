@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:10:48 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/27 03:26:17 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/27 22:44:07 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,29 @@ typedef struct s_stack
 {
 	int				nb;
 	int				index;
+	struct s_stack	*target;
 	struct s_stack	*next;
 }	t_stack;
 
 // Sort
 void	sort_dispatch(t_stack **a, t_stack **b);
-void	move_cheapest(t_list **a, t_list **b, int *size_a, int *size_b);
+void	push_cheapest(char to_name, t_stack *cheapest, t_stack *target,
+			t_stack **from, t_stack **to, int *size_from, int *size_to);
+void	get_cheapest(char to_name, t_stack **cheapest, t_stack **target,
+			t_stack *a, t_stack *b, int *size_a, int *size_b);
 
-// Moves
-void	move_push(char *move, t_list **a, t_list **b, int *size_a, int *size_b);
-void	move_one(char *move, t_list **stack);
-void	move_both(char *move, t_list **a, t_list **b);
-int		get_target(int smaller, t_list *current, t_list *targets,
-			int *size_targets, t_list **target_node);
+// Moves calculation
+void	set_target(int find_smaller, t_stack *from_node, t_stack *to_stack,
+			int *to_size);
+
+// Moves definition
+void	move_push(char *move, t_stack **a, t_stack **b, int *size_a, int *size_b);
+void	move_one(char *move, t_stack **stack);
+void	move_both(char *move, t_stack **a, t_stack **b);
+int		do_push(t_stack **from, t_stack **to);
+int		do_swap(t_stack **stack);
+int		do_rotate(t_stack **stack);
+int		do_rev_rotate(t_stack **stack);
 
 // Utils
 void	free_matrix(char **arr);

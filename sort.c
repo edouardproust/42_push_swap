@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:34:57 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/27 03:56:24 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/27 21:48:48 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,16 @@ static void	sort_three(t_stack **stack)
  */
 static void	sort_lists(t_stack **a, t_stack **b, int size_a)
 {
-	int	size_b;
+	int		size_b;
 
 	size_b = 0;
 	while (size_a > 3 && size_b < 2)
 		move_push("pb", a, b, &size_a, &size_b);
 	while (size_a > 3)
-		move_cheapest(a, b, &size_a, &size_b);
+		push_cheapest('b', a, b, &size_a, &size_b);
 	sort_three(a);
 	while (size_b > 0)
-		push_all_back_to_a(a, b, &size_a, &size_b);
+		push_cheapest('a', b, a, &size_b, &size_a);		
 	rotate_smallest_on_top(a, size_a);
 }
 
@@ -111,7 +111,7 @@ void	sort_dispatch(t_stack **a, t_stack **b)
 
 	if (is_stack_sorted(*a))
 		return ;
-	ft_debug("PRINT_LISTS", *a, *b); // TODO Delete line
+	ft_debug("PRINT_STACKS", *a, *b); // TODO Delete line
 	size_a = ft_lstsize(*a);
 	if (size_a == 2)
 		move_one("sa", a);
