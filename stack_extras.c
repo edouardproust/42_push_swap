@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 19:47:29 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/27 02:37:13 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/28 13:20:22 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param find_max	1 to find the maximum value, 0 for the minimum.
  * @return			The node containing the min or max value.
  */
-int	minmax_node(t_stack *stack, int find_max)
+t_stack	*minmax_node(t_stack *stack, int find_max)
 {
 	t_stack  *minmax;
 

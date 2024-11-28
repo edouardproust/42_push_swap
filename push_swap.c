@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:00:07 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/27 03:08:51 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/28 14:29:17 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,20 @@ static int	check_stack(t_stack *stack)
 static t_stack	*build_stack(t_stack *stack, char **av, int is_malloc_av)
 {
 	t_stack	*node;
-	int		i;
 	int		nb;
 
-	i = 0;
-	while (av[i])
+	while (*av)
 	{
-		if (!is_valid_number(av[i]))
+		if (!is_valid_number(*av))
 			error_exit(av, stack, is_malloc_av);
-		nb = ft_atoi(av[i]);
-		node = new_node(nb, i);
+		nb = ft_atoi(*av);
+		node = new_node(nb, 0);
 		if (!node)
 			error_exit(av, stack, is_malloc_av);
 		add_node_back(&stack, node);
-		i++;
+		av++;
 	}
-	if (av[i] != NULL || !check_stack(stack))
+	if (*av != NULL || !check_stack(stack))
 		error_exit(av, stack, is_malloc_av);
 	if (is_malloc_av)
 		free_matrix(av);
@@ -84,7 +82,6 @@ int	main(int ac, char **av)
 {
 	t_stack	*a;
 	t_stack	*b;
-	char	**args;
 
 	a = NULL;
 	b = NULL;

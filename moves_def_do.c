@@ -6,28 +6,11 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:22:36 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/27 17:29:28 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/28 21:23:49 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/**
- * Updates the indices of all elements in the stack, starting from 0.
- *
- * @param stack	Pointer to the first element of the stack (t_stack*).
- */
-static void update_indexes(t_stack *stack)
-{
-	int i;
-
-	i = 0;
-	while (stack)
-	{
-		stack->index = i++;
-		stack = stack->next;
-	}
-}
 
 /**
  * Moves the top element from one stack to another, updating both
@@ -44,10 +27,9 @@ int	do_push(t_stack **from, t_stack **to)
 	if (!(*from))
 		return (0);
 	f2 = (*from)->next;
-	ft_lstadd_front(to, *from);
+	add_node_front(to, *from);
 	*from = f2;
 	update_indexes(*from);
-	update_indexes(*to);
 	return (1);
 }
 
@@ -88,7 +70,7 @@ int	do_rotate(t_stack **stack)
 
 	if (!*stack || !(*stack)->next)
 		return (0);
-	tail = ft_lstlast(*stack);
+	tail = last_node(*stack);
 	n2 = (*stack)->next;
 	tail->next = *stack;
 	(*stack)->next = NULL;

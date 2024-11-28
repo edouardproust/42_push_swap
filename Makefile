@@ -21,7 +21,7 @@ $(NAME): $(O_FILES) $(A_LIB)
 	cc $(FLAGS) -o $@ $(O_FILES) $(A_LIB)
 
 $(A_LIB):
-	$(MAKE) -C $(LIB_DIR) bonus
+	$(MAKE) -C $(LIB_DIR)
 
 clean:
 	rm -f $(O_FILES)

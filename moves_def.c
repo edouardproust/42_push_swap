@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:55:12 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/27 17:33:58 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/28 21:35:34 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,19 @@
  * Execute a push: move the top node of stack 'from' to the top of stack 'to'.
  * Also update value of size_a and value of szie_b.
  */
-void	move_push(char *move, t_stack **a, t_stack **b, int *size_a, int *size_b)
+void	move_push(char *move, t_stack **from, t_stack **to, int *size_a, int *size_b)
 {
 	int	success;
 
 	success = 0;
-	if (move[1] == 'b')
-	{
-		success = do_push(a, b);
-		*size_a -= 1;
-		*size_b += 1;
-	}
-	else
-	{
-		success = do_push(b, a);
-		*size_a += 1;
-		*size_b -= 1;
-	}
+	success = do_push(from, to);
+	*size_a -= 1;
+	*size_b += 1;
 	if (success)
 	{
 		ft_putstr_fd(move, 1);
 		ft_putchar_fd('\n', 1);	
-		ft_debug("PRINT_STACKS", *a, *b); // TODO Delete line
+		move[1] == 'b' ? ft_debug("PRINT_STACKS", *from, *to) : ft_debug("PRINT_STACKS", *to, *from); // TODO Delete line
 	}
 }
 

@@ -6,7 +6,7 @@
 #    By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:20:43 by eproust           #+#    #+#              #
-#    Updated: 2024/11/22 17:00:09 by eproust          ###   ########.fr        #
+#    Updated: 2024/11/28 15:08:35 by eproust          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ $(NAME): $(O_FILES) $(A_LIB)
 	cc $(FLAGS) -o $@ $(O_FILES) $(A_LIB)
 
 $(A_LIB):
-	$(MAKE) -C $(LIB_DIR) bonus
+	$(MAKE) -C $(LIB_DIR)
 
 clean:
 	rm -f $(O_FILES) $(wildcard $(ROOT_DIR)*.o)
