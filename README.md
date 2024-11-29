@@ -25,13 +25,16 @@ make test
 ## Run tests
 
 ### Test with random number:
+
+For a single test on a list containing 500 ints (replace `500` by your desired number of ints):
 ```
 cd test
 make ARGS="$(./generate 500)" // Replace 500 by the desired number of ints
 ```
-To test it 100 times for example:
+To test it 50 times for example (replace `50` by your desired number of tests):
 ```
-for i in {1..100}; do make count ARGS="$(./generate 500)"; done
+cd test
+for i in {1..50}; do make check count ARGS="$(./generate 500)"; done
 ```
 
 ### Memory leaks
