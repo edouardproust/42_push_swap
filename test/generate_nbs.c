@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 05:57:06 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/29 05:59:05 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/29 06:33:58 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Initialisation du générateur de nombres aléatoires
-    srand(time(NULL));
+    // Initialisation du générateur de nombres aléatoires avec une graine plus précise
+    srand((unsigned int)(clock() * 1000000L)); // Multiplier par 1 million pour une plus grande granularité
 
     // Générer et afficher la liste d'entiers aléatoires
     for (int i = 0; i < size; i++) {
-        // Générer un nombre aléatoire compris entre INT_MIN et INT_MAX
+        // Générer un nombre aléatoire entre INT_MIN et INT_MAX
         int random_num = rand();
 
-        // Si le nombre dépasse INT_MAX / 2, le rendre négatif
-        if (random_num % 2 == 0) {
+        // Pour rendre le nombre soit positif ou négatif, nous appliquons une modification
+        if (rand() % 2 == 0) {
             random_num = -random_num;
         }
 
