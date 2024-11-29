@@ -29,6 +29,10 @@ make test
 cd test
 make ARGS="$(./generate 500)" // Replace 500 by the desired number of ints
 ```
+To test it 100 times for example:
+```
+for i in {1..100}; do make count ARGS="$(./generate 500)"; done
+```
 
 ### Memory leaks
 - Install [valgrind](https://valgrind.org/): `sudo apt update && sudo apt install valgrind`
