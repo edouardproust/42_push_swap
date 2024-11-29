@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:56:11 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/26 22:50:15 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/29 04:03:38 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	error_exit(char **av, t_stack *stack, int is_malloc_av)
 		free_matrix(av);
 	if (stack)
 		clear_stack(&stack);
-	exit(2);
+	exit(1);
 }
 
 int	is_valid_number(char *n)

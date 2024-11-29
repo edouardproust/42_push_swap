@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:00:07 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/28 14:29:17 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/29 02:57:32 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ int	main(int ac, char **av)
 	if (ac == 2)
 		av = ft_split((const char *)(*av), ' ');
 	a = build_stack(a, av, ac == 2);
+	//ft_debug("PRINT_STACKS", a, b); // TODO Delete line
 	sort_dispatch(&a, &b);
+	//ft_debug("PRINT_STACKS", a, b); // TODO Delete line
 	clear_stack(&a);
 	return (0);
 }

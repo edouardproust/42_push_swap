@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:34:57 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/28 21:36:05 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/29 04:55:40 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,20 @@ static void	rotate_smallest_on_top(t_stack **stack, int size)
 {
 	t_stack	*min;
 	int		rotations;
-	int		dir;
+	char	*move;
 
 	if (!stack)
 		return ;
 	min = minmax_node(*stack, 0);
 	rotations = min->index;
-	dir = 1;
+	move = "r";
 	if (min->index > size / 2)
 	{
 		rotations = size - min->index;
-		dir = -1;
+		move = "rr";
 	}
-	while (rotations > 0)
-	{
-		if (dir == 1)
-			move_one("ra", stack);
-		else
-			move_one("rra", stack);
-		rotations--;
-	}
+	while (rotations-- > 0)
+		move_one(move, stack, 'a');
 }
 
 /**
@@ -61,11 +55,11 @@ static void	sort_three(t_stack **stack)
 
 	max = minmax_node(*stack, 1);
 	if (max->index == 0)
-		move_one("ra", stack);
+		move_one("r", stack, 'a');
 	else if (max->index == 1)
-		move_one("rra", stack);
+		move_one("rr", stack, 'a');
 	if ((*stack)->nb > (*stack)->next->nb)
-		move_one("sa", stack);
+		move_one("s", stack, 'a');
 }
 
 /**
@@ -87,7 +81,7 @@ static void	sort_lists(t_stack **a, t_stack **b, int size_a)
 
 	size_b = 0;
 	while (size_a > 3 && size_b < 2)
-		move_push("pb", a, b, &size_a, &size_b);
+		move_push(a, b, 'b', &size_a, &size_b);
 	while (size_a > 3)
 		push_cheapest('b', a, b, &size_a, &size_b);
 	sort_three(a);
@@ -111,10 +105,9 @@ void	sort_dispatch(t_stack **a, t_stack **b)
 
 	if (is_stack_sorted(*a))
 		return ;
-	ft_debug("PRINT_STACKS", *a, *b); // TODO Delete line
 	size_a = stack_size(*a);
 	if (size_a == 2)
-		move_one("sa", a);
+		move_one("s", a, 'a');
 	else if (size_a == 3)
 		sort_three(a);
 	else

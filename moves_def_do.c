@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:22:36 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/28 21:23:49 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/29 02:56:11 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	do_rev_rotate(t_stack **stack)
 		before_last->index = i++;
 		before_last = before_last->next;
 	}
+	before_last->index = i;
 	tail = before_last->next;
 	tail->index = 0;
 	before_last->next = NULL;

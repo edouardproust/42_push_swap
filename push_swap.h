@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:10:48 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/28 15:21:54 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/29 03:49:41 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	set_target(char to_name, t_stack *from_node, t_stack *to_stack,
 			int *to_size);
 
 // Moves definition
-void	move_push(char *move, t_stack **a, t_stack **b, int *size_a, int *size_b);
-void	move_one(char *move, t_stack **stack);
+void	move_push(t_stack **from, t_stack **to, char to_name, int *size_a, int *size_b);
+void	move_one(char *move, t_stack **stack, char stack_name);
 void	move_both(char *move, t_stack **a, t_stack **b);
 int		do_push(t_stack **from, t_stack **to);
 int		do_swap(t_stack **stack);
