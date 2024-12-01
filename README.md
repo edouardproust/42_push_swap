@@ -66,7 +66,8 @@ Checks if the list is sorted after applying the program's moves:
 
 ### Automated Tester
 
-![42 push_swap automated tester loop](test/screenshot/42_push_swap__tools__multi_tester.png)
+![42 push_swap automated tester command](test/screenshot/42_push_swap__tools__multi_command.png)
+![42 push_swap automated tester result](test/screenshot/42_push_swap__tools__multi_result.png)
 
 The `test` folder contains a script to run multiple tests:
 
