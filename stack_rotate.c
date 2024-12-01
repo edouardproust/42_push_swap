@@ -6,13 +6,14 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:43:16 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 02:55:16 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 14:47:24 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	stacks_simult_rotate(char *move, t_stack **s1, t_stack **s2, t_cost *c)
+static void	stacks_simult_rotate(char *move, t_stack **s1, t_stack **s2,
+	t_cost *c)
 {
 	while (c->from_cost > 0 && c->to_cost > 0)
 	{
@@ -28,7 +29,7 @@ static void	stack_rotate(int dir, t_stack **stack, int n)
 
 	move = "r";
 	if (dir == -1)
-		move = "rr";	
+		move = "rr";
 	while (n-- > 0)
 		move_one(move, stack);
 }
@@ -55,4 +56,3 @@ void	rotate_smallest_on_top(t_stack **stack)
 	else
 		stack_rotate(1, stack, min->index);
 }
-

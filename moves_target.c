@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:36:41 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 02:01:02 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 14:32:25 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 /**
  * If the target stack is B, the rules are:
- * 1. The target node is the closest smaller number to the origin number (in stack A).
- * 2. If the origin number (in stack A) is smaller than all numbers in B, the target number is the biggest number in B.
+ * 1. The target node is the closest smaller number to the origin number
+ *    (in stack A).
+ * 2. If the origin number (in stack A) is smaller than all numbers in B, 
+ *    the target number is the biggest number in B.
  * If the target stack is A, the rules are:
- * 1. The target node (in B is the closest bigger number to the origin number (in stack A).
- * 2. If the origin number (in stack A) is bigger than all numbers in B, the target number is the smallest number in B.
+ * 1. The target node (in B is the closest bigger number to the origin number
+      (in stack A).
+ * 2. If the origin number (in stack A) is bigger than all numbers in B, the
+      target number is the smallest number in B.
  */
 static t_stack	*update_minmax(t_stack *minmax, t_stack *to_node)
 {

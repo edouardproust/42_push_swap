@@ -6,13 +6,13 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 19:47:29 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 05:15:03 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 14:23:20 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void update_stack_data(t_stack *stack, int updte_indexes, int updte_ssize)
+void	update_stack_data(t_stack *stack, int updte_indexes, int updte_ssize)
 {
 	int		i;
 	t_stack	*s;
@@ -41,7 +41,7 @@ void update_stack_data(t_stack *stack, int updte_indexes, int updte_ssize)
 
 t_stack	*minmax_node(t_stack *stack, int find_max)
 {
-	t_stack  *minmax;
+	t_stack	*minmax;
 
 	if (!stack)
 		return (NULL);

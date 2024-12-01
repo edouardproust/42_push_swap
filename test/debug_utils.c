@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 21:49:57 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 06:19:10 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 15:33:08 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 int	get_digits_nb(int n)
 {
-	int	count = 1;
+	int	count;
+
+	count = 1;
 	if (n == INT_MIN)
-		return (11);	
+		return (11);
 	if (n < 0)
 	{
 		count++;
@@ -33,11 +35,13 @@ int	get_digits_nb(int n)
 
 int	max_digits_nb(t_stack *stack)
 {
-	int	min = INT_MAX;
-	int	max = INT_MIN;
+	int	min;
+	int	max;
 	int	digits_min;
 	int	digits_max;
 
+	min = INT_MAX;
+	max = INT_MIN;
 	if (!stack)
 		return (0);
 	while (stack)
@@ -55,10 +59,13 @@ int	max_digits_nb(t_stack *stack)
 	return (digits_max);
 }
 
-void	print_node_data(char *prefix, t_stack *stack, int nl)
+void	print_node_data(char *prefix, t_stack *stack)
 {
-	char *gray = "\033[90m";
-	char *white = "\033[0m";
+	char	*gray;
+	char	*white;
+
+	gray = "\033[90m";
+	white = "\033[0m";
 	if (!stack)
 		return ;
 	printf(" %s%s%d[ ", gray, prefix, stack->index);
@@ -70,12 +77,13 @@ void	print_node_data(char *prefix, t_stack *stack, int nl)
 		printf("sname:%c ", stack->sname);
 	if (stack->next)
 		printf("next:%d ", stack->next->nb);
-	printf("]%s%s", white, nl ? "\n" : "");
+	printf("]%s", white);
 }
 
-void repeat_char(char *c, int n)
+void	repeat_char(char *c, int n)
 {
-	while (n > 0) {
+	while (n > 0)
+	{
 		printf("%s", c);
 		n--;
 	}
@@ -83,9 +91,10 @@ void repeat_char(char *c, int n)
 
 int	get_cols(int digits_a, int digits_b)
 {
-	int cols = digits_a + digits_b + 2;
+	int	cols;
+
+	cols = digits_a + digits_b + 2;
 	if (digits_a > 0 && digits_b > 0)
 		cols++;
 	return (cols);
 }
-

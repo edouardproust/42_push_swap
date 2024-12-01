@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:34:57 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 05:19:30 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 14:22:08 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,16 @@ static void	sort_lists(t_stack **a, t_stack **b, int size_a)
 	rotate_smallest_on_top(a);
 }
 
+// TODO `update_stack_data(*a, 0, 1);`: optimize (prevent double loop)
 void	sort_dispatch(t_stack **a, t_stack **b)
 {
 	if (is_stack_sorted(*a))
 		return ;
-	update_stack_data(*a, 0, 1); // TODO Optimize (prevent double loop)
+	update_stack_data(*a, 0, 1);
 	if ((*a)->ssize == 2)
 		move_one("s", a);
 	else if ((*a)->ssize == 3)
 		sort_three(a);
 	else
-		sort_lists(a, b, (*a)->ssize); // TODO size
+		sort_lists(a, b, (*a)->ssize);
 }

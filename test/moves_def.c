@@ -6,14 +6,18 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:55:12 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 16:25:41 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 16:21:25 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
+#define DEBUG 1 // TODO Debug (remove line)
+
 /**
- * To debug, replacethis file by test/moves_def.c 
+ * To debug, add this line before function closing bracket:
+ *	if (DEBUG) (*to)->sname == 'a' ? ft_debug(*to, *from) : 
+ *		ft_debug(*from, *to);
  */
 void	move_push(t_stack **from, t_stack **to)
 {
@@ -26,10 +30,13 @@ void	move_push(t_stack **from, t_stack **to)
 		ft_putchar_fd((*to)->sname, 1);
 		ft_putchar_fd('\n', 1);
 	}
+	if (DEBUG) (*to)->sname == 'a' ? ft_debug(*to, *from) : ft_debug(*from, *to); //TODO Debug (remove line)
 }
 
 /**
- * To debug, replace this file by test/moves_def.c 
+ * To debug, add this line before function closing bracket:
+ * if (DEBUG) (*stack)->sname == 'a' ? ft_debug(*stack, NULL) : 
+ *	ft_debug(NULL, *stack);
  */
 void	move_one(char *move, t_stack **stack)
 {
@@ -48,10 +55,12 @@ void	move_one(char *move, t_stack **stack)
 		ft_putchar_fd((*stack)->sname, 1);
 		ft_putchar_fd('\n', 1);
 	}
+	if (DEBUG) (*stack)->sname == 'a' ? ft_debug(*stack, NULL) : ft_debug(NULL, *stack); //TODO Debug (remove line)
 }
 
 /**
- * To debug, replace this file by test/moves_def.c 
+ * To debug, add this line before function closing bracket:
+ *	if (DEBUG) ft_debug(*a, *b);
  */
 void	move_both(char *move, t_stack **a, t_stack **b)
 {
@@ -78,4 +87,5 @@ void	move_both(char *move, t_stack **a, t_stack **b)
 		ft_putstr_fd(move, 1);
 		ft_putchar_fd('\n', 1);
 	}
+	if (DEBUG) ft_debug(*a, *b); //TODO
 }

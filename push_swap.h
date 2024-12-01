@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:10:48 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 04:28:28 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 15:03:31 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 }	t_stack;
 
-typedef struct	s_cost
+typedef struct s_cost
 {
 	int	from_dir;
 	int	from_cost;
@@ -40,7 +40,7 @@ typedef struct	s_cost
 void	sort_dispatch(t_stack **a, t_stack **b);
 
 // moves_calc.c
-void    push_cheapest(t_stack **from, t_stack **to);
+void	push_cheapest(t_stack **from, t_stack **to);
 
 // moves_target.c
 void	set_node_target(t_stack *from_node, t_stack *to_stack);

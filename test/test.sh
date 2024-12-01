@@ -6,13 +6,12 @@
 #    By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/30 19:36:03 by eproust           #+#    #+#              #
-#    Updated: 2024/12/01 07:00:24 by eproust          ###   ########.fr        #
+#    Updated: 2024/12/01 17:16:54 by eproust          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/bash
 
-# Vérifier que l'argument est fourni
 if [ -z "$1" ]; then
     echo "Usage: $0 <number_of_runs>"
     exit 1
@@ -33,10 +32,10 @@ progress_bar() {
 }
 
 for i in $(seq 1 $total_runs); do
-    output+=$(make test ARGS="$(./generator 500)")
+    output+=$(make loop ARGS="$(./generator 500)")
     progress_bar $i $total_runs
 done
 
+echo "$output"
 echo -e "\nKO: $(echo "$output" | grep -c "KO")"
 echo ">5500: $(echo "$output" | grep -oP '\d+' | awk '$1 > 5500' | wc -l)"
-

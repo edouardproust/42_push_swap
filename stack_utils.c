@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:20:36 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 04:00:56 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 14:27:14 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	add_node_back(t_stack **stack, t_stack *new_node)
 	if (!*stack)
 	{
 		*stack = new_node;
-        return ;
+		return ;
 	}
 	tail = last_node(*stack);
-    new_node->index = tail->index + 1;
+	new_node->index = tail->index + 1;
 	tail->next = new_node;
 }
 

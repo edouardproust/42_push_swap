@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:56:11 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/29 04:03:38 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 14:33:07 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_matrix(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arr[i])

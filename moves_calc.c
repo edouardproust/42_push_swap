@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 22:11:36 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 05:16:49 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 14:19:21 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_cost	get_cost_data(t_stack *from, t_stack *to)
 {
-	t_cost c;
+	t_cost	c;
 
 	c.from_cost = from->index;
 	c.from_dir = 1;
@@ -41,9 +41,10 @@ static t_cost	get_cost_data(t_stack *from, t_stack *to)
 	return (c);
 }
 
+// b has reached top of stack using simultaneous moves only
 static int	get_cost(t_cost c)
 {
-	if (c.to_left < 0) // b has reached top of stack using simultaneous moves only
+	if (c.to_left < 0)
 		c.to_left = 0;
 	if (c.to_left < c.to_cost)
 		c.to_cost = c.to_left;
@@ -75,6 +76,6 @@ void	push_cheapest(t_stack **from, t_stack **to)
 			current->target = NULL;
 		current = current->next;
 	}
-	rotate_nodes_on_top(from, to, &cheapest_cost_data); 
+	rotate_nodes_on_top(from, to, &cheapest_cost_data);
 	move_push(from, to);
 }
