@@ -6,14 +6,21 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:55:12 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 16:25:41 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/02 00:13:25 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
 /**
- * To debug, replacethis file by test/moves_def.c 
+ * Executes a push operation between two stacks.
+ *
+ * The top element of the `from` stack is moved to the top of the `to` stack.
+ * If the operation is successful, the move is printed in the format:
+ * "pX\n", where `X` is the name of the `to` stack.
+ *
+ * @param from A pointer to the source stack.
+ * @param to A pointer to the destination stack.
  */
 void	move_push(t_stack **from, t_stack **to)
 {
@@ -29,7 +36,18 @@ void	move_push(t_stack **from, t_stack **to)
 }
 
 /**
- * To debug, replace this file by test/moves_def.c 
+ * Executes a single move operation on a stack.
+ *
+ * Depending on the `move` string, this function performs one of the following:
+ * - "s" : Swap the first two elements of the stack.
+ * - "r" : Rotate the stack upwards (first element becomes last).
+ * - "rr": Reverse rotate the stack (last element becomes first).
+ *
+ * If the operation is successful, the move is printed in the format:
+ * "moveX\n", where `X` is the name of the stack.
+ *
+ * @param move A string representing the move to execute ("s", "r", "rr").
+ * @param stack A pointer to the stack on which to perform the move.
  */
 void	move_one(char *move, t_stack **stack)
 {
@@ -51,7 +69,19 @@ void	move_one(char *move, t_stack **stack)
 }
 
 /**
- * To debug, replace this file by test/moves_def.c 
+ * Executes a simultaneous move operation on two stacks.
+ *
+ * Depending on the `move` string, this function performs one of the following:
+ * - "ss" : Swap the first two elements of both stacks.
+ * - "rr" : Rotate both stacks upwards.
+ * - "rrr": Reverse rotate both stacks.
+ *
+ * If any operation is successful, the move is printed in the format:
+ * "move\n".
+ *
+ * @param move A string representing the move to execute ("ss", "rr", "rrr").
+ * @param a A pointer to the first stack.
+ * @param b A pointer to the second stack.
  */
 void	move_both(char *move, t_stack **a, t_stack **b)
 {

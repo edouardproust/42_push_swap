@@ -6,12 +6,21 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:20:36 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 14:27:14 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 23:40:39 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/**
+ * Creates a new node for the stack.
+ *
+ * Allocates memory for a new stack node, initializes its fields, and sets
+ * default values.
+ *
+ * @param nb The value to assign to the new node.
+ * @return A pointer to the created node, or NULL if allocation fails.
+ */
 t_stack	*new_node(int nb)
 {
 	t_stack	*new_node;
@@ -27,6 +36,14 @@ t_stack	*new_node(int nb)
 	return (new_node);
 }
 
+/**
+ * Retrieves the last node of a stack.
+ *
+ * Traverses the stack to find and return the last node.
+ *
+ * @param stack The stack to search.
+ * @return A pointer to the last node, or NULL if the stack is empty.
+ */
 t_stack	*last_node(t_stack *stack)
 {
 	if (!stack)
@@ -36,6 +53,14 @@ t_stack	*last_node(t_stack *stack)
 	return (stack);
 }
 
+/**
+ * Adds a node to the end of the stack.
+ *
+ * Appends a new node to the tail of the stack and updates its index.
+ *
+ * @param stack A pointer to the stack.
+ * @param new_node The node to add.
+ */
 void	add_node_back(t_stack **stack, t_stack *new_node)
 {
 	t_stack	*tail;
@@ -50,6 +75,15 @@ void	add_node_back(t_stack **stack, t_stack *new_node)
 	tail->next = new_node;
 }
 
+/**
+ * Adds a node to the front of the stack.
+ *
+ * Prepends a new node to the head of the stack and updates its data.
+ * Also alternates the `sname` field between 'a' and 'b'.
+ *
+ * @param stack A pointer to the stack.
+ * @param new_node The node to add.
+ */
 void	add_node_front(t_stack **stack, t_stack *new_node)
 {
 	new_node->next = *stack;
@@ -62,6 +96,14 @@ void	add_node_front(t_stack **stack, t_stack *new_node)
 	update_stack_data(*stack, 1, 1);
 }
 
+/**
+ * Clears the stack and frees all its nodes.
+ *
+ * Iterates through the stack, freeing each node and setting the stack pointer
+ * to NULL.
+ *
+ * @param stack A pointer to the stack to clear.
+ */
 void	clear_stack(t_stack **stack)
 {
 	t_stack	*current;

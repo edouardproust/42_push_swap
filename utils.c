@@ -6,12 +6,20 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:56:11 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 14:33:07 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 23:42:41 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/**
+ * Frees a null-terminated array of strings.
+ *
+ * Iterates through each string in the array, frees it, and sets the pointer
+ * to NULL. Frees the array itself and sets the pointer to NULL.
+ *
+ * @param arr A null-terminated array of strings to free.
+ */
 void	free_matrix(char **arr)
 {
 	int	i;
@@ -27,6 +35,16 @@ void	free_matrix(char **arr)
 	arr = NULL;
 }
 
+/**
+ * Exits the program with an error message.
+ *
+ * Prints "Error\n" to stdout, frees allocated resources, and exits the program.
+ *
+ * @param av The input arguments array, dynamically allocated if `is_malloc_av`
+ *           is true.
+ * @param stack The stack to free, if not NULL.
+ * @param is_malloc_av Flag indicating if `av` was dynamically allocated.
+ */
 void	error_exit(char **av, t_stack *stack, int is_malloc_av)
 {
 	ft_putstr_fd("Error\n", 1);
@@ -37,6 +55,15 @@ void	error_exit(char **av, t_stack *stack, int is_malloc_av)
 	exit(1);
 }
 
+/**
+ * Validates if a string represents a valid integer.
+ *
+ * Checks if the input string is a valid representation of a number,
+ * allowing an optional '+' or '-' sign at the beginning.
+ *
+ * @param n The string to validate.
+ * @return 1 if the string is valid, 0 otherwise.
+ */
 int	is_valid_number(char *n)
 {
 	if (*n == '-' || *n == '+')

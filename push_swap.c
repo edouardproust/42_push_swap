@@ -6,12 +6,20 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:00:07 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 01:22:21 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 23:32:03 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/**
+ * Validates the stack.
+ *
+ * Checks if the stack contains valid integer values and ensures no duplicates.
+ *
+ * @param stack The stack to validate.
+ * @return 1 if the stack is valid, 0 otherwise.
+ */
 static int	check_stack(t_stack *stack)
 {
 	t_stack	*next;
@@ -34,6 +42,17 @@ static int	check_stack(t_stack *stack)
 	return (1);
 }
 
+/**
+ * Builds a stack from input arguments.
+ *
+ * Converts the input arguments into a stack of integers and performs validation.
+ * Frees resources and exits if errors are detected.
+ *
+ * @param stack The stack to build on.
+ * @param av The array of input arguments.
+ * @param is_malloc_av Flag indicating if `av` was dynamically allocated.
+ * @return The constructed stack.
+ */
 static t_stack	*build_stack(t_stack *stack, char **av, int is_malloc_av)
 {
 	t_stack	*node;
@@ -59,6 +78,15 @@ static t_stack	*build_stack(t_stack *stack, char **av, int is_malloc_av)
 	return (stack);
 }
 
+/**
+ * Program entry point.
+ *
+ * Parses arguments, builds the stack, sorts it, and clears resources.
+ *
+ * @param ac The argument count.
+ * @param av The argument vector.
+ * @return 0 on successful execution.
+ */
 int	main(int ac, char **av)
 {
 	t_stack	*a;

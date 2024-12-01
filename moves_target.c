@@ -6,23 +6,18 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:36:41 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 14:32:25 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/02 00:30:08 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /**
- * If the target stack is B, the rules are:
- * 1. The target node is the closest smaller number to the origin number
- *    (in stack A).
- * 2. If the origin number (in stack A) is smaller than all numbers in B, 
- *    the target number is the biggest number in B.
- * If the target stack is A, the rules are:
- * 1. The target node (in B is the closest bigger number to the origin number
-      (in stack A).
- * 2. If the origin number (in stack A) is bigger than all numbers in B, the
-      target number is the smallest number in B.
+ * Updates the min or max node in the target stack.
+ *
+ * If the target stack is B, it returns the smallest number greater than
+ * the current min. If the target stack is A, it returns the largest number
+ * smaller than the current max.
  */
 static t_stack	*update_minmax(t_stack *minmax, t_stack *to_node)
 {
@@ -41,6 +36,13 @@ static t_stack	*update_minmax(t_stack *minmax, t_stack *to_node)
 	return (to_node);
 }
 
+/**
+ * Determines the best target node for a given `from_node` in the target stack.
+ *
+ * - For stack B, it picks the closest smaller number to the `from_node`.
+ * - For stack A, it picks the closest larger number.
+ * If no valid target is found, returns the appropriate min or max.
+ */
 static t_stack	*update_target(t_stack *target, t_stack *from_node,
 	t_stack *to_node)
 {
@@ -56,6 +58,13 @@ static t_stack	*update_target(t_stack *target, t_stack *from_node,
 	return (target);
 }
 
+/**
+ * Sets the target node for a `from_node` by iterating over the target stack.
+ *
+ * The target is chosen based on the closest number (smaller or larger)
+ * depending on the stack. If no target is found, the minimum or maximum
+ * value is used as the fallback target.
+ */
 void	set_node_target(t_stack *from_node, t_stack *to_stack)
 {
 	t_stack	*minmax;
