@@ -5,57 +5,54 @@
 #                                                     +:+ +:+         +:+      #
 #    By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/19 15:20:43 by eproust           #+#    #+#              #
-#    Updated: 2024/11/29 05:31:17 by eproust          ###   ########.fr        #
+#    Created: 2024/11/29 22:11:13 by eproust           #+#    #+#              #
+#    Updated: 2024/12/01 06:41:34 by eproust          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= push_swap
+NAME		= ../push_swap
 
-ARGS		= 4 2 3 1
+ARGS		?= -9000 7401 -4041 8192 -4877 -8356 2027 19 128 -1261 -6008 -1961 5153 2475 7637 -5841 8413 -993 4442 -2015 4977 4472 -2244 1373 5492 6777 -124 -279 4445 -9607 6401 5072 5042 3621 -1604 -7859 8713 -9938 -9527 -2385 -6649 -2871 -606 -4754 -8609 7134 -6161 2529 977 -3392 8139 5514 9936 -4161 -9467 -835 2062 9242 -9561 -4071 4710 5885 6117 4780 4565 6027 -5776 2261 3346 -1528 -5673 -5282 -2421 -6755 -1226 6506 -4737 9512 806 -4300 -2465 -7131 8220 306 2167 732 549 5576 -9595 -1305 -5862 -9462 6555 -7805 -9619 5436 -2432 -3029 -8312 -8571
 
-FLAGS		= -I$(ROOT_DIR) -I$(LIB_DIR) -I.
+FLAGS		= -I. -I$(ROOT_DIR) -I$(LIB_DIR)
 
-C_TEST		= test.c
+C_TEST		= debug.c debug_utils.c
 
 ROOT_DIR	= ../
 LIB_DIR		= $(ROOT_DIR)libft/
 A_LIB		= $(LIB_DIR)libft.a
-C_FILES		= $(filter-out $(wildcard ../*test*.c), $(wildcard ../*.c)) $(C_TEST)
+C_FILES		= $(wildcard ../*.c) $(C_TEST)
 H_FILES		= $(wildcard $(ROOT_DIR)*.h)
 O_FILES		= $(C_FILES:.c=.o)
 
-all: moves count check
+all: test
+
+$(NAME): $(O_FILES) $(A_LIB)
+	cc $(FLAGS) -o $@ $(O_FILES) $(A_LIB)
 
 %.o: %.c Makefile $(ROOT_DIR)Makefile $(H_FILES)
 	cc $(FLAGS) -c $< -o $@
 
-check: $(NAME)
-	@echo "             ┌────────────────┐"
-	@echo "─────────────┤ Checker output ├─────────────"
-	@echo "             └────────────────┘"
-	@ARG="$(ARGS)"; ./push_swap $$ARG | ./checker_linux $$ARG
-
-count: $(NAME)
-	@echo "              ┌─────────────┐"
-	@echo "──────────────┤ Moves count ├───────────────"
-	@echo "              └─────────────┘"
-	@ARG="$(ARGS)"; ./push_swap $$ARG | grep -a -E '^(pa|pb|ra|rb|rra|rrb|sa|sb|rr|rrr)$$' | wc -l
-
-moves: $(NAME)
-	@echo "              ┌────────────┐"
-	@echo "──────────────┤ Moves list ├────────────────"
-	@echo "              └────────────┘"
-	@./$(NAME) $(ARGS)
+test: $(NAME)
+	@RES=$$($(NAME) $(ARGS)); \
+	echo "              ┌────────────┐"; \
+	echo "──────────────┤ Moves list ├────────────────"; \
+	echo "              └────────────┘"; \
+	echo "$$RES"; \
+	echo "             ┌────────────────┐"; \
+	echo "─────────────┤ Checker output ├─────────────"; \
+	echo "             └────────────────┘"; \
+	echo "$$RES" | ./checker_linux $(ARGS); \
+	echo "              ┌─────────────┐"; \
+	echo "──────────────┤ Moves count ├───────────────"; \
+	echo "              └─────────────┘"; \
+	echo "$$RES" | wc -l;
 
 valgrind: $(NAME)
 	@echo "             ┌───────────────┐"
 	@echo "─────────────┤ Valgrind test ├──────────────"
 	@echo "             └───────────────┘"
-	@valgrind ./$(NAME) $(ARGS)
-
-$(NAME): $(O_FILES) $(A_LIB)
-	cc $(FLAGS) -o $@ $(O_FILES) $(A_LIB)
+	@valgrind $(NAME) $(ARGS)
 
 $(A_LIB):
 	$(MAKE) -C $(LIB_DIR)

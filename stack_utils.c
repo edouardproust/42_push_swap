@@ -6,43 +6,13 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 20:20:36 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/28 17:11:58 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 04:00:56 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/**
- * Updates the indices of all elements in the stack, starting from 0.
- *
- * @param stack	Pointer to the first element of the stack (t_stack*).
- */
-void update_indexes(t_stack *stack)
-{
-	int i;
-
-	i = 0;
-	while (stack)
-	{
-		stack->index = i++;
-		stack = stack->next;
-	}
-}
-
-int	stack_size(t_stack *stack)
-{
-	int		count;
-
-	count = 0;
-	while (stack)
-	{
-		count++;
-		stack = stack->next;
-	}
-	return (count);
-}
-
-t_stack	*new_node(int nb, int index)
+t_stack	*new_node(int nb)
 {
 	t_stack	*new_node;
 
@@ -50,7 +20,9 @@ t_stack	*new_node(int nb, int index)
 	if (!new_node)
 		return (NULL);
 	new_node->nb = nb;
-	new_node->index = index;
+	new_node->index = 0;
+	new_node->ssize = 0;
+	new_node->sname = 'a';
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -81,9 +53,13 @@ void	add_node_back(t_stack **stack, t_stack *new_node)
 void	add_node_front(t_stack **stack, t_stack *new_node)
 {
 	new_node->next = *stack;
-	new_node->target = 0;
+	new_node->target = NULL;
+	if (new_node->sname == 'a')
+		new_node->sname = 'b';
+	else
+		new_node->sname = 'a';
 	*stack = new_node;
-	update_indexes(*stack);
+	update_stack_data(*stack, 1, 1);
 }
 
 void	clear_stack(t_stack **stack)

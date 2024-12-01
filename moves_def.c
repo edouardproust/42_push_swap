@@ -6,45 +6,29 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:55:12 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/29 06:02:36 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 06:05:34 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-/*
- * Execute a push: move the top node of stack 'from' to the top of stack 'to'.
- * Also update value of size_a and value of szie_b.
- *
- * To debug, use this before function closing bracket:
- * 	to_name == 'b' ? ft_debug("PRINT_STACKS", *from, *to) : 
- * 	ft_debug("PRINT_STACKS", *to, *from);
- */
-void	move_push(t_stack **from, t_stack **to, char to_name, int *size_from, int *size_to)
+#define DEBUG 1 //TODO
+
+void	move_push(t_stack **from, t_stack **to)
 {
 	int	success;
 
-	success = 0;
 	success = do_push(from, to);
-	*size_from -= 1;
-	*size_to += 1;
 	if (success)
 	{
 		ft_putchar_fd('p', 1);
-		ft_putchar_fd(to_name, 1);
+		ft_putchar_fd((*to)->sname, 1);
 		ft_putchar_fd('\n', 1);	
 	}
-//	to_name == 'b' ? ft_debug("PRINT_STACKS", *from, *to) : ft_debug("PRINT_STACKS", *to, *from); //TODO
+//	if (DEBUG) (*to)->sname == 'a' ? ft_debug(*to, *from) : ft_debug(*from, *to); //TODO
 }
 
-/*
- * Executes a single move on a stack:
- * swap (0), rotate (1), or reverse rotate (-1).
- *
- * To debug, add this before function closing bracket:
- * 	ft_debug(ft_strrchr(move, 'a') ? "PRINT_STACK_A" : "PRINT_STACK_B", *stack);
- */
-void	move_one(char *move, t_stack **stack, char stack_name)
+void	move_one(char *move, t_stack **stack)
 {
 	int	success;
 
@@ -58,19 +42,12 @@ void	move_one(char *move, t_stack **stack, char stack_name)
 	if (success)
 	{
 			ft_putstr_fd(move, 1);
-			ft_putchar_fd(stack_name, 1);
+			ft_putchar_fd((*stack)->sname, 1);
 			ft_putchar_fd('\n', 1);
 	}
-//	ft_debug(ft_strrchr(move, 'a') ? "PRINT_STACK_A" : "PRINT_STACK_B", *stack); //TODO
+//	if (DEBUG) (*stack)->sname == 'a' ? ft_debug(*stack, NULL) : ft_debug(NULL, *stack); //TODO
 }
 
-/*
- * Execute a same single move on both stacks simultaneously:
- * swap (0), rotate (1), or reverse rotate (-1).
- *
- * To debug, add this before function closing bracket:
- * 	ft_debug("PRINT_STACKS", *a, *b);
- */
 void	move_both(char *move, t_stack **a, t_stack **b)
 {
 	int	success;
@@ -96,5 +73,5 @@ void	move_both(char *move, t_stack **a, t_stack **b)
 		ft_putstr_fd(move, 1);	
 		ft_putchar_fd('\n', 1);
 	}
-//	ft_debug("PRINT_STACKS", *a, *b); // TODO
+//	if (DEBUG) ft_debug(*a, *b); //TODO
 }

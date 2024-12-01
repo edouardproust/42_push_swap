@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:10:48 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/29 03:49:41 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 04:28:28 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,59 @@ typedef struct s_stack
 	int				nb;
 	int				index;
 	struct s_stack	*target;
+	char			sname;
+	int				ssize;
 	struct s_stack	*next;
 }	t_stack;
 
+typedef struct	s_cost
+{
+	int	from_dir;
+	int	from_cost;
+	int	to_dir;
+	int	to_cost;
+	int	to_left;
+}	t_cost;
+
 // Sort
 void	sort_dispatch(t_stack **a, t_stack **b);
-void    push_cheapest(char to_name, t_stack **from, t_stack **to,
-			int *size_from, int *size_to);
-void	get_cheapest(char to_name, t_stack **cheapest, t_stack **target,
-			t_stack *a, t_stack *b, int *size_a, int *size_b);
 
-// Moves calculation
-void	set_target(char to_name, t_stack *from_node, t_stack *to_stack,
-			int *to_size);
+// moves_calc.c
+void    push_cheapest(t_stack **from, t_stack **to);
 
-// Moves definition
-void	move_push(t_stack **from, t_stack **to, char to_name, int *size_a, int *size_b);
-void	move_one(char *move, t_stack **stack, char stack_name);
+// moves_target.c
+void	set_node_target(t_stack *from_node, t_stack *to_stack);
+
+// moves_def.c
+void	move_push(t_stack **from, t_stack **to);
+void	move_one(char *move, t_stack **stack);
 void	move_both(char *move, t_stack **a, t_stack **b);
+
+// moves_def_do.c
 int		do_push(t_stack **from, t_stack **to);
 int		do_swap(t_stack **stack);
 int		do_rotate(t_stack **stack);
 int		do_rev_rotate(t_stack **stack);
 
-// Utils
-void	free_matrix(char **arr);
-void	error_exit(char **av, t_stack *stack, int is_malloc_av);
-int		is_valid_number(char *n);
+// stack_rotate.c
+void	rotate_nodes_on_top(t_stack **from, t_stack **to, t_cost *c);
+void	rotate_smallest_on_top(t_stack **stack);
 
-// Stack utils
-void	update_indexes(t_stack *stack);
-int		stack_size(t_stack *stack);
-t_stack	*new_node(int nb, int index);
+// stack_utils.c
+t_stack	*new_node(int nb);
 t_stack	*last_node(t_stack *stack);
 void	add_node_back(t_stack **stack, t_stack *new_node);
 void	add_node_front(t_stack **stack, t_stack *new_node);
 void	clear_stack(t_stack **stack);
 
-// Stack extras
+// stack_utils2.c
+void	update_stack_data(t_stack *stack, int updte_indexes, int updte_ssize);
 t_stack	*minmax_node(t_stack *stack, int find_max);
 int		is_stack_sorted(t_stack *stack);
+
+// utils.c
+void	free_matrix(char **arr);
+void	error_exit(char **av, t_stack *stack, int is_malloc_av);
+int		is_valid_number(char *n);
 
 #endif

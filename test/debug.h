@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:32:10 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/26 20:00:44 by eproust          ###   ########.fr       */
+/*   Updated: 2024/11/30 02:44:02 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
+#ifndef DEBUG_H
+# define DEBUG_H
 
 #include <stdio.h>
 
-void	ft_debug(const char *move, t_stack *a, t_stack *b);
+int		get_digits_nb(int n);
+int		max_digits_nb(t_stack *stack);
+void	print_node_data(char *prefix, t_stack *stack, int nl);
+void	repeat_char(char *c, int n);
+int		get_cols(int digits_a, int digits_b);
 
 #endif

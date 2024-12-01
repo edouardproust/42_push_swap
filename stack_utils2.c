@@ -1,24 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_extras.c                                     :+:      :+:    :+:   */
+/*   stack_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 19:47:29 by eproust           #+#    #+#             */
-/*   Updated: 2024/11/28 13:20:22 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 05:15:03 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/**
- * Finds the node with the minimum or maximum value in the stack.
- *
- * @param stack		The stack to search through.
- * @param find_max	1 to find the maximum value, 0 for the minimum.
- * @return			The node containing the min or max value.
- */
+void update_stack_data(t_stack *stack, int updte_indexes, int updte_ssize)
+{
+	int		i;
+	t_stack	*s;
+
+	if (!stack)
+		return ;
+	i = 0;
+	s = stack;
+	while (s)
+	{
+		if (updte_indexes)
+			s->index = i;
+		s = s->next;
+		i++;
+	}
+	if (updte_ssize)
+	{
+		s = stack;
+		while (s)
+		{
+			s->ssize = i;
+			s = s->next;
+		}
+	}
+}
+
 t_stack	*minmax_node(t_stack *stack, int find_max)
 {
 	t_stack  *minmax;
@@ -37,10 +57,6 @@ t_stack	*minmax_node(t_stack *stack, int find_max)
 	return (minmax);
 }
 
-/**
- * Check if the list is sorted in ascending order
- * (based on the content of each node)
- */
 int	is_stack_sorted(t_stack *stack)
 {
 	if (!stack)
@@ -53,4 +69,3 @@ int	is_stack_sorted(t_stack *stack)
 	}
 	return (1);
 }
-
