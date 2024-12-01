@@ -6,11 +6,12 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:34:57 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 14:22:08 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/01 18:58:03 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h> // TODO
 
 static void	sort_three(t_stack **stack)
 {
@@ -25,7 +26,7 @@ static void	sort_three(t_stack **stack)
 		move_one("s", stack);
 }
 
-static void	sort_lists(t_stack **a, t_stack **b, int size_a)
+static void	sort_lists(t_stack **a, t_stack **b)
 {
 	while ((*a)->ssize > 3 && (!*b || (*b)->ssize < 2))
 		move_push(a, b);
@@ -39,7 +40,7 @@ static void	sort_lists(t_stack **a, t_stack **b, int size_a)
 
 // TODO `update_stack_data(*a, 0, 1);`: optimize (prevent double loop)
 void	sort_dispatch(t_stack **a, t_stack **b)
-{
+{	
 	if (is_stack_sorted(*a))
 		return ;
 	update_stack_data(*a, 0, 1);
@@ -48,5 +49,5 @@ void	sort_dispatch(t_stack **a, t_stack **b)
 	else if ((*a)->ssize == 3)
 		sort_three(a);
 	else
-		sort_lists(a, b, (*a)->ssize);
+		sort_lists(a, b);
 }

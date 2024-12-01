@@ -6,7 +6,7 @@
 #    By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:20:43 by eproust           #+#    #+#              #
-#    Updated: 2024/12/01 17:35:32 by eproust          ###   ########.fr        #
+#    Updated: 2024/12/01 18:08:12 by eproust          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ loop: $(NAME)
 	@RESULT="$$($(NAME) $(ARGS))"; \
 	LINE_COUNT=$$(echo "$$RESULT" | wc -l); \
 	CHECK=$$(echo "$$RESULT" | ./checker_linux $(ARGS)); \
-	echo "$$LINE_COUNT ($$CHECK)  "
+	echo "\n$$LINE_COUNT $$CHECK ";
 
 clean:
 	rm -f $(O_FILES) $(wildcard $(ROOT_DIR)*.o)
