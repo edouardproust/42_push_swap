@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:00:07 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/01 23:32:03 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/02 05:18:12 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,8 @@ static int	check_stack(t_stack *stack)
 {
 	t_stack	*next;
 
-	if (!stack)
-		return (0);
 	while (stack)
 	{
-		if (stack->nb > INT_MAX || stack->nb < INT_MIN)
-			return (0);
 		next = stack->next;
 		while (next)
 		{
@@ -56,7 +52,7 @@ static int	check_stack(t_stack *stack)
 static t_stack	*build_stack(t_stack *stack, char **av, int is_malloc_av)
 {
 	t_stack	*node;
-	int		nb;
+	long	nb;
 	char	**args;
 
 	args = av;
@@ -64,7 +60,9 @@ static t_stack	*build_stack(t_stack *stack, char **av, int is_malloc_av)
 	{
 		if (!is_valid_number(*av))
 			error_exit(args, stack, is_malloc_av);
-		nb = ft_atoi(*av);
+		nb = ft_atol(*av);
+		if (nb > INT_MAX || nb < INT_MIN)
+			error_exit(args, stack, is_malloc_av);
 		node = new_node(nb);
 		if (!node)
 			error_exit(args, stack, is_malloc_av);
@@ -94,8 +92,6 @@ int	main(int ac, char **av)
 
 	a = NULL;
 	b = NULL;
-	if (ac == 1 || (ac == 2 && av[1][0] == '\0'))
-		error_exit(av, NULL, 0);
 	av++;
 	if (ac == 2)
 		av = ft_split((const char *)(*av), ' ');

@@ -1,35 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:03:27 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/02 05:35:44 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/02 05:08:05 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atol(const char *nptr)
 {
-	int	n;
+	int		sign;
+	long	res;
 
-	n = ft_atol(nptr);
-	return (n);
+	sign = 1;
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+	{
+		if (*nptr == '-')
+			sign = -1;
+		nptr++;
+	}
+	res = 0;
+	while (ft_isdigit(*nptr))
+	{
+		res = res * 10 + *nptr - '0';
+		nptr++;
+	}
+	return (res * sign);
 }
 
 /*
 #include <stdio.h>
 #include <stdlib.h>
 
-int	main(void)
+void	main(void)
 {
-	char *str = " 99999999999999999";
+	char *str = "-0y45us";
 
 	printf("string: \"%s\"\n", str);
-	printf("ft_atoi: %d\n", ft_atoi(str));
-	printf("atoi: %d\n", atoi(str));
+	printf("ft_atol: %d\n", ft_atol(str));
+	printf("atol: %d\n", atol(str));
 }
 */
