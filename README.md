@@ -3,17 +3,17 @@
 **`push_swap` prints in stdout the instructions to sort input ints in ascending order.**
 - The pogram aims to print the **smallest number of instructions** necessary to sort the ints.
 - The instructions tell in order which **movements** to performed in or between **2 stacks A and B**:
-	- sa (swap a): Swap the first 2 elements at the top of stack a.
-	- sb (swap b): Swap the first 2 elements at the top of stack b.
-	- ss : sa and sb at the same time.
-	- pa (push a): Take the first element at the top of b and put it at the top of a.
-	- pb (push b): Take the first element at the top of a and put it at the top of b.
-	- ra (rotate a): Shift up all elements of stack a by 1.
-	- rb (rotate b): Shift up all elements of stack b by 1.
-	- rr : ra and rb at the same time.
-	- rra (reverse rotate a): Shift down all elements of stack a by 1.
-	- rrb (reverse rotate b): Shift down all elements of stack b by 1.
-	- rrr : rra and rrb at the same time.
+	- `sa` (swap a): Swap the first 2 elements at the top of stack a.
+	- `sb` (swap b): Swap the first 2 elements at the top of stack b.
+	- `ss` : sa and sb at the same time.
+	- `pa` (push a): Take the first element at the top of b and put it at the top of a.
+	- `pb` (push b): Take the first element at the top of a and put it at the top of b.
+	- `ra` (rotate a): Shift up all elements of stack a by 1.
+	- `rb` (rotate b): Shift up all elements of stack b by 1.
+	- `rr` : ra and rb at the same time.
+	- `rra` (reverse rotate a): Shift down all elements of stack a by 1.
+	- `rrb` (reverse rotate b): Shift down all elements of stack b by 1.
+	- `rrr` : rra and rrb at the same time.
 
 - **Subject:** [English](./subject/en.subject.pdf) / [French](./subject/fr.subject.pdf) / [Spanish](./subject/es.subject.pdf)
 - **Location:** 42 School Barcelona
