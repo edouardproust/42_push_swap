@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:10:48 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/02 05:16:14 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/02 21:27:27 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	set_node_target(t_stack *from_node, t_stack *to_stack);
 // moves_def.c
 void	move_push(t_stack **from, t_stack **to);
 void	move_one(char *move, t_stack **stack);
-void	move_both(char *move, t_stack **a, t_stack **b);
+void	move_both(char *move, t_stack **a, t_stack **b, int print);
 
 // moves_def_do.c
 int		do_push(t_stack **from, t_stack **to);
@@ -68,6 +68,8 @@ void	add_node_front(t_stack **stack, t_stack *new_node);
 void	clear_stack(t_stack **stack);
 
 // stack_utils2.c
+int		check_stack(t_stack *stack);
+t_stack	*build_stack(t_stack *stack, char **av, int is_malloc_av);
 void	update_stack_data(t_stack *stack, int updte_indexes, int updte_ssize);
 t_stack	*minmax_node(t_stack *stack, int find_max);
 int		is_stack_sorted(t_stack *stack);

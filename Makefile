@@ -6,11 +6,12 @@
 #    By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/01 17:05:43 by eproust           #+#    #+#              #
-#    Updated: 2024/12/01 18:47:26 by eproust          ###   ########.fr        #
+#    Updated: 2024/12/03 04:38:38 by eproust          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+NAME_BONUS = checker
 
 C_FILES	= moves_calc.c \
 moves_def.c \
@@ -23,7 +24,16 @@ stack_utils2.c \
 stack_utils.c \
 utils.c \
 
+C_BONUS = checker_bonus.c \
+checker_utils_bonus.c \
+moves_def.c \
+moves_def_do.c \
+stack_utils2.c \
+stack_utils.c \
+utils.c \
+
 O_FILES = $(C_FILES:.c=.o)
+O_BONUS = $(C_BONUS:.c=.o)
 
 H_FILES = push_swap.h
 H_DIR = ./
@@ -40,6 +50,9 @@ all: $(NAME)
 
 $(NAME): $(O_FILES) $(A_LIB)
 	cc $(FLAGS) -o $@ $(O_FILES) $(A_LIB)
+
+bonus: $(O_BONUS) $(A_LIB)
+	cc -o $(NAME_BONUS) $(O_BONUS) $(A_LIB)
 
 $(A_LIB):
 	$(MAKE) -C $(LIB_DIR)

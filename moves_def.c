@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:55:12 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/02 00:13:25 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/02 21:44:05 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	move_one(char *move, t_stack **stack)
  * @param a A pointer to the first stack.
  * @param b A pointer to the second stack.
  */
-void	move_both(char *move, t_stack **a, t_stack **b)
+void	move_both(char *move, t_stack **a, t_stack **b, int print)
 {
 	int	success;
 
@@ -103,7 +103,7 @@ void	move_both(char *move, t_stack **a, t_stack **b)
 		success = do_rev_rotate(a);
 		success |= do_rev_rotate(b);
 	}
-	if (success)
+	if (print && success)
 	{
 		ft_putstr_fd(move, 1);
 		ft_putchar_fd('\n', 1);

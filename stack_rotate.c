@@ -6,7 +6,7 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:43:16 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/02 00:03:31 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/02 21:28:40 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	stacks_simult_rotate(char *move, t_stack **s1, t_stack **s2,
 {
 	while (c->from_cost > 0 && c->to_cost > 0)
 	{
-		move_both(move, s1, s2);
+		move_both(move, s1, s2, 1);
 		(c->from_cost)--;
 		(c->to_cost)--;
 	}

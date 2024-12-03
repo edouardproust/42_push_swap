@@ -4,7 +4,12 @@
 *.swp
 *.swo
 *.bak
+
 .gitignore
-*push_swap
+README.md
+
 subject
 test
+
+push_swap
+checker

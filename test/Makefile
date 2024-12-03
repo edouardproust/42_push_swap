@@ -6,7 +6,7 @@
 #    By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 15:20:43 by eproust           #+#    #+#              #
-#    Updated: 2024/12/01 18:08:12 by eproust          ###   ########.fr        #
+#    Updated: 2024/12/03 05:10:06 by eproust          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ C_TEST		= debug.c debug_utils.c
 ROOT_DIR	= ../
 LIB_DIR		= $(ROOT_DIR)libft/
 A_LIB		= $(LIB_DIR)libft.a
-C_FILES		= $(filter-out $(wildcard ../*test*.c), $(wildcard ../*.c)) $(C_TEST)
+C_FILES		= $(filter-out $(wildcard ../*bonus*.c), $(wildcard ../*.c)) $(C_TEST)
 H_FILES		= $(wildcard $(ROOT_DIR)*.h)
 O_FILES		= $(C_FILES:.c=.o)
 

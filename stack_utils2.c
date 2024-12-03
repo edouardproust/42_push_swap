@@ -6,11 +6,75 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 19:47:29 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/02 00:00:02 by eproust          ###   ########.fr       */
+/*   Updated: 2024/12/02 18:52:35 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/**
+ * Validates the stack.
+ *
+ * Checks if the stack contains valid integer values and ensures no duplicates.
+ *
+ * @param stack The stack to validate.
+ * @return 1 if the stack is valid, 0 otherwise.
+ */
+int	check_stack(t_stack *stack)
+{
+	t_stack	*next;
+
+	while (stack)
+	{
+		next = stack->next;
+		while (next)
+		{
+			if (stack->nb == next->nb)
+				return (0);
+			next = next->next;
+		}
+		stack = stack->next;
+	}
+	return (1);
+}
+
+/**
+ * Builds a stack from input arguments.
+ *
+ * Converts the input arguments into a stack of integers and performs validation.
+ * Frees resources and exits if errors are detected.
+ *
+ * @param stack The stack to build on.
+ * @param av The array of input arguments.
+ * @param is_malloc_av Flag indicating if `av` was dynamically allocated.
+ * @return The constructed stack.
+ */
+t_stack	*build_stack(t_stack *stack, char **av, int is_malloc_av)
+{
+	t_stack	*node;
+	long	nb;
+	char	**args;
+
+	args = av;
+	while (*av)
+	{
+		if (!is_valid_number(*av))
+			error_exit(args, stack, is_malloc_av);
+		nb = ft_atol(*av);
+		if (nb > INT_MAX || nb < INT_MIN)
+			error_exit(args, stack, is_malloc_av);
+		node = new_node(nb);
+		if (!node)
+			error_exit(args, stack, is_malloc_av);
+		add_node_back(&stack, node);
+		av++;
+	}
+	if (*av != NULL || !check_stack(stack))
+		error_exit(args, stack, is_malloc_av);
+	if (is_malloc_av)
+		free_matrix(args);
+	return (stack);
+}
 
 /**
  * Updates the stack data such as indices and size.
